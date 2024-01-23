@@ -1,10 +1,8 @@
 import s from "./App.module.css";
-import { SWAPI_PEOPLE, getApiResource } from "./../../utils/network";
-
-getApiResource(SWAPI_PEOPLE);
+import PeoplePage from "../PeoplePage";
 
 const App = () => {
-    return <h1 className={s.header}>Hello</h1>;
+    return <PeoplePage />;
 };
 
 export default App;

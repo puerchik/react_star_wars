@@ -1,7 +1,5 @@
 import axios, { AxiosError } from "axios";
 
-export const SWAPI_PEOPLE = "people";
-
 const instance = axios.create({
     baseURL: "https://swapi.dev/api/",
 });
@@ -9,14 +7,12 @@ const instance = axios.create({
 export const getApiResource = async (endpoint: string) => {
     try {
         const res = await instance.get<Response>(endpoint);
-        console.log(res);
 
         if (res.status !== 200) {
             console.log("Could not fetch. ", res.status);
             return false;
         }
-        const body: Response = res.data;
-        console.log(body);
+        return res.data;
     } catch (e: unknown) {
         if (e instanceof AxiosError) {
             console.log("Could not fetch. ", e.response?.status);
@@ -31,5 +27,24 @@ type Response = {
     count: number;
     next: null | string;
     previous: null | string;
-    results: any[];
+    results: ResultPeople[];
+};
+
+type ResultPeople = {
+    name: string;
+    height: string;
+    mass: string;
+    hair_color: string;
+    skin_color: string;
+    eye_color: string;
+    birth_year: string;
+    gender: string;
+    homeworld: string;
+    films: string[];
+    species: string[];
+    vehicles: string[];
+    starships: string[];
+    created: string;
+    edited: string;
+    url: string;
 };
