@@ -1,7 +1,8 @@
 import axios, { AxiosError } from "axios";
+import { SWAPI_ROOT } from "../constatnts/api";
 
 const instance = axios.create({
-    baseURL: "https://swapi.dev/api/",
+    baseURL: SWAPI_ROOT,
 });
 
 export const getApiResource = async (endpoint: string) => {

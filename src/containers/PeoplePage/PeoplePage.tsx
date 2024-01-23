@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import s from "./PeoplePage.module.css";
 import { ResultPeopleName, getApiResource } from "../../utils/network";
-import { SWAPI_PEOPLE } from "../../constatnts/api";
+import { GUIDE_ROOT_IMG, SWAPI_PEOPLE } from "../../constatnts/api";
+import { getPeopleId } from "../../services/getPeopleData";
 
 const PeoplePage = () => {
     const [people, setPeople] = useState<null | ResultPeopleName[]>(null);
@@ -27,8 +28,14 @@ const PeoplePage = () => {
         <>
             {people && (
                 <ul>
-                    {people.map(({ name }) => (
-                        <li key={name}>{name}</li>
+                    {people.map(({ name, url }) => (
+                        <li key={name}>
+                            <img
+                                src={GUIDE_ROOT_IMG + getPeopleId(url) + ".jpg"}
+                                alt={name}
+                            />
+                            <p>{name}</p>
+                        </li>
                     ))}
                 </ul>
             )}
