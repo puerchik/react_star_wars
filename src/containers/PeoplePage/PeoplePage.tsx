@@ -3,6 +3,7 @@ import s from "./PeoplePage.module.css";
 import { ResultPeopleName, getApiResource } from "../../utils/network";
 import { GUIDE_ROOT_IMG, SWAPI_PEOPLE } from "../../constatnts/api";
 import { getPeopleId } from "../../services/getPeopleData";
+import PeopleList from "../../components/PeoplePage/PeopleList";
 
 const PeoplePage = () => {
     const [people, setPeople] = useState<null | ResultPeopleName[]>(null);
@@ -24,23 +25,7 @@ const PeoplePage = () => {
         getResource(SWAPI_PEOPLE);
     }, []);
 
-    return (
-        <>
-            {people && (
-                <ul>
-                    {people.map(({ name, url }) => (
-                        <li key={name}>
-                            <img
-                                src={GUIDE_ROOT_IMG + getPeopleId(url) + ".jpg"}
-                                alt={name}
-                            />
-                            <p>{name}</p>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </>
-    );
+    return <>{people && <PeopleList people={people} />}</>;
 };
 
 export default PeoplePage;
