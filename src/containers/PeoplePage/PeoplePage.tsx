@@ -1,22 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import s from "./PeoplePage.module.css";
-import { getApiResource } from "../../utils/network";
+import { ResultPeopleName, getApiResource } from "../../utils/network";
 import { SWAPI_PEOPLE } from "../../constatnts/api";
 
 const PeoplePage = () => {
+    const [people, setPeople] = useState<null | ResultPeopleName[]>(null);
     const getResource = async (url: string) => {
         const res = await getApiResource(url);
-        let peopleList;
+
         if (res) {
-            peopleList = res.results.map(({ name, url }) => {
+            const peopleList = res.results.map(({ name, url }) => {
                 return {
                     name,
                     url,
                 };
             });
+            setPeople(peopleList);
         }
-
-        console.log(peopleList);
     };
 
     useEffect(() => {
@@ -25,7 +25,13 @@ const PeoplePage = () => {
 
     return (
         <>
-            <div>Hello world!</div>
+            {people && (
+                <ul>
+                    {people.map(({ name }) => (
+                        <li key={name}>{name}</li>
+                    ))}
+                </ul>
+            )}
         </>
     );
 };

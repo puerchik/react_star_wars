@@ -48,3 +48,5 @@ type ResultPeople = {
     edited: string;
     url: string;
 };
+
+export type ResultPeopleName = Pick<ResultPeople, "name" | "url">;
