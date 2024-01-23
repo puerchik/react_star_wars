@@ -9,11 +9,17 @@ type Props = {
 
 const PeopleList = ({ people }: Props) => {
     return (
-        <ul>
+        <ul className={s.list__container}>
             {people.map(({ name, url }) => (
-                <li key={name}>
-                    <img src={GUIDE_ROOT_IMG + getPeopleId(url) + ".jpg"} alt={name} />
-                    <p>{name}</p>
+                <li className={s.list__item} key={name}>
+                    <a href="#">
+                        <img
+                            className={s.person__photo}
+                            src={GUIDE_ROOT_IMG + getPeopleId(url) + ".jpg"}
+                            alt={name}
+                        />
+                        <p>{name}</p>
+                    </a>
                 </li>
             ))}
         </ul>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import s from "./PeoplePage.module.css";
 import { ResultPeopleName, getApiResource } from "../../utils/network";
-import { GUIDE_ROOT_IMG, SWAPI_PEOPLE } from "../../constatnts/api";
-import { getPeopleId } from "../../services/getPeopleData";
+import { SWAPI_PEOPLE } from "../../constatnts/api";
 import PeopleList from "../../components/PeoplePage/PeopleList";
 
 const PeoplePage = () => {
