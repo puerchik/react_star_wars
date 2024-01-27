@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import s from './Layout.module.css';
+import CustomLink from '../components/CustomLink';
 
 type SetActiveType = {
   isActive: boolean;
@@ -13,12 +14,8 @@ const Layout = () => {
   return (
     <>
       <header>
-        <NavLink to="/" style={setActive}>
-          Home
-        </NavLink>
-        <NavLink to="/people" style={setActive}>
-          People
-        </NavLink>
+        <CustomLink to="/">Home</CustomLink>
+        <CustomLink to="/people">People</CustomLink>
       </header>
       <Outlet />
       <footer>FOOTER</footer>
