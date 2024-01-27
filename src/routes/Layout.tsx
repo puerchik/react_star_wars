@@ -5,16 +5,18 @@ type SetActiveType = {
   isActive: boolean;
 };
 
-const setActive = ({ isActive }: SetActiveType) => (isActive ? 'active-link' : '');
+const setActive = ({ isActive }: SetActiveType) => {
+  return { color: isActive ? 'var(--color-yellow)' : 'var(--color-white)' };
+};
 
 const Layout = () => {
   return (
     <>
       <header>
-        <NavLink to="/" className={setActive}>
+        <NavLink to="/" style={setActive}>
           Home
         </NavLink>
-        <NavLink to="/people" className={setActive}>
+        <NavLink to="/people" style={setActive}>
           People
         </NavLink>
       </header>
