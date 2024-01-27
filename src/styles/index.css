@@ -6,11 +6,15 @@
 
   --spacing-medium: 20px;
 
+  --transition: 0.4s;
+
   --font-family-main: sans-serif;
 
   --font-size-header: 26px;
 
   --border-radius-small: 3px;
+
+  --theme-default-header: #cccc46;
 }
 
 body {
@@ -18,4 +22,20 @@ body {
   padding: 0;
   background-color: var(--color-dark-gray);
   font-family: var(--font-family-main);
+}
+
+.header__text {
+  line-height: 1.7;
+  font-size: var(--font-size-header);
+  text-shadow: 0 0 2px var(--color-balck);
+  color: var(--theme-default-header);
+  transition: color var(--transition);
+}
+
+a.active-link {
+  color: var(--color-yellow);
+}
+
+a {
+  color: var(--color-white);
 }
