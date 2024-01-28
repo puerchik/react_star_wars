@@ -1,9 +1,13 @@
+import { useParams } from 'react-router-dom';
 import s from './ForStudySinglePage.module.css';
 
 const ForStudySinglePage = () => {
+  const { id } = useParams();
+  console.log(id);
+
   return (
     <>
-      <p>1</p>
+      <p>{id}</p>
     </>
   );
 };
