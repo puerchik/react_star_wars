@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import s from './ForStudyBlog.module.css';
 
-type post = {
+export type Post = {
   userId: number;
   id: number;
   title: string;
@@ -10,7 +10,7 @@ type post = {
 };
 
 const ForStudyBlog = () => {
-  const [posts, setPosts] = useState<post[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
