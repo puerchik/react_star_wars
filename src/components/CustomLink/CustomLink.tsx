@@ -9,6 +9,7 @@ type CustomLink = {
 
 const CustomLink = ({ children, to, ...props }: CustomLink) => {
   const match = useMatch(to);
+  console.log(useMatch(to));
 
   return (
     <Link to={to} className={match ? 'active-link' : ''} {...props}>
