@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Post } from './ForStudyBlog';
 import s from './ForStudySinglePage.module.css';
+import { useAuth } from '../../hook/useAuth';
 
 const ForStudySinglePage = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const ForStudySinglePage = () => {
       <button onClick={goBack}>Go back</button>
       {/* Bad approach */}
       <button onClick={goHome}>Go home</button>
+
       {post && (
         <>
           <h1>{post.title}</h1>
