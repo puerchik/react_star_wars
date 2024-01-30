@@ -8,7 +8,6 @@ export type childrenProps = {
 const RequireAuth = ({ children }: childrenProps) => {
   const location = useLocation();
   const auth = useAuth();
-  console.log(auth);
 
   if (auth) {
     const { user } = auth;
@@ -17,7 +16,7 @@ const RequireAuth = ({ children }: childrenProps) => {
     }
   }
 
-  return children !== undefined ? children : null;
+  return children;
 };
 
 export { RequireAuth };

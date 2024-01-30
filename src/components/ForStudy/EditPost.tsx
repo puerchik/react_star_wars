@@ -6,7 +6,6 @@ const EditPost = () => {
   const { id } = useParams();
   const auth = useAuth();
   const navigate = useNavigate();
-  console.log(auth);
 
   let signOutOk: (cb: () => void) => void;
   if (auth) {

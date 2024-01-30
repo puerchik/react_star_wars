@@ -14,8 +14,6 @@ import { useAuth } from '../../hook/useAuth';
 const App = () => {
   const auth = useAuth();
 
-  console.log(auth);
-
   return (
     <>
       <AuthProvider>
