@@ -9,6 +9,7 @@ const ForStudySinglePage = () => {
   const navigate = useNavigate();
 
   const goBack = () => navigate(-1);
+  const goHome = () => navigate('/', { replace: true });
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -19,6 +20,8 @@ const ForStudySinglePage = () => {
   return (
     <>
       <button onClick={goBack}>Go back</button>
+      {/* Bad approach */}
+      <button onClick={goHome}>Go home</button>
       {post && (
         <>
           <h1>{post.title}</h1>
