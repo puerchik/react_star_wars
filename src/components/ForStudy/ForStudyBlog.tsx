@@ -27,7 +27,7 @@ const ForStudyBlog = () => {
 
   return (
     <>
-      <BlogFilter setSearchParams={setSearchParams} />
+      <BlogFilter postQuery={postQuery} latest={!!latest} setSearchParams={setSearchParams} />
       <h1>Our news</h1>
       <ol>
         {posts

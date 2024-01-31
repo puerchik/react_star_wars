@@ -1,8 +1,11 @@
 import { SetURLSearchParams } from 'react-router-dom';
 import s from './BlogFilter.module.css';
+import { useState } from 'react';
 
 type Props = {
   setSearchParams: SetURLSearchParams;
+  postQuery: string;
+  latest: boolean;
 };
 
 type Params = {
@@ -10,7 +13,10 @@ type Params = {
   latest?: string;
 };
 
-const BlogFilter = ({ setSearchParams }: Props) => {
+const BlogFilter = ({ setSearchParams, postQuery, latest }: Props) => {
+  const [search, setSearch] = useState<string>(postQuery);
+  const [checked, setChecked] = useState<boolean>(latest);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -27,8 +33,18 @@ const BlogFilter = ({ setSearchParams }: Props) => {
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <input type="search" name="search" />
-      <input type="checkbox" name="latest" />
+      <input
+        type="search"
+        name="search"
+        value={search}
+        onChange={e => setSearch(e.currentTarget.value)}
+      />
+      <input
+        type="checkbox"
+        name="latest"
+        checked={checked}
+        onChange={e => setChecked(e.currentTarget.checked)}
+      />
       <input type="submit" value="search" />
     </form>
   );
