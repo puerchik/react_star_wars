@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import s from './ForStudyBlog.module.css';
+import BlogFilter from './BlogFilter';
 
 export type Post = {
   userId: number;
   id: number;
   title: string;
   body: string;
-};
-
-type Params = {
-  post?: string;
-  latest?: string;
 };
 
 const ForStudyBlog = () => {
@@ -29,27 +25,9 @@ const ForStudyBlog = () => {
       .then(data => setPosts(data));
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const query = (form.elements.namedItem('search') as HTMLInputElement).value;
-    const checked = (form.elements.namedItem('latest') as HTMLInputElement).checked;
-
-    const params: Params = {};
-
-    if (query) params.post = query;
-    if (checked) params.latest = 'true';
-
-    setSearchParams(params);
-  };
-
   return (
     <>
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <input type="search" name="search" />
-        <input type="checkbox" name="latest" />
-        <input type="submit" value="search" />
-      </form>
+      <BlogFilter setSearchParams={setSearchParams} />
       <h1>Our news</h1>
       <ol>
         {posts
