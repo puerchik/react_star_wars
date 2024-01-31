@@ -9,6 +9,11 @@ export type Post = {
   body: string;
 };
 
+type Params = {
+  post?: string;
+  latest?: string;
+};
+
 const ForStudyBlog = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,7 +21,7 @@ const ForStudyBlog = () => {
   const postQuery = searchParams.get('post') || '';
   const latest = searchParams.has('latest');
 
-  console.log(postQuery);
+  const startsFrom = latest ? 80 : 1;
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -28,9 +33,14 @@ const ForStudyBlog = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const query = (form.elements.namedItem('search') as HTMLInputElement).value;
-    const checked = (form.elements.namedItem('latest') as HTMLInputElement).value;
+    const checked = (form.elements.namedItem('latest') as HTMLInputElement).checked;
 
-    setSearchParams({ post: query });
+    const params: Params = {};
+
+    if (query) params.post = query;
+    if (checked) params.latest = 'true';
+
+    setSearchParams(params);
   };
 
   return (
@@ -43,7 +53,7 @@ const ForStudyBlog = () => {
       <h1>Our news</h1>
       <ol>
         {posts
-          .filter(f => f.title.includes(postQuery))
+          .filter(f => f.title.includes(postQuery) && f.id > startsFrom)
           .map(post => (
             <Link key={post.id} to={`/posts/${post.id}`}>
               <li>{post.title}</li>
