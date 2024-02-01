@@ -35,6 +35,7 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
   return (
     <>
       <h1>List of movie characters</h1>
+      <h2>Test</h2>
       {people && <PeopleList people={people} />}
     </>
   );
