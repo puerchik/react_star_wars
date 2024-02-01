@@ -32,14 +32,7 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
     getResource(SWAPI_PEOPLE);
   }, []);
 
-  return (
-    <>
-      <h1>List of movie characters</h1>
-      <h2>Test</h2>
-      <h2>Test123</h2>
-      {people && <PeopleList people={people} />}
-    </>
-  );
+  return <>{people && <PeopleList people={people} />}</>;
 };
 
 export default WithErrorApi(PeoplePage);
