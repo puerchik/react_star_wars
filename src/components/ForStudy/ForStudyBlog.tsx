@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import s from './ForStudyBlog.module.css';
+import { Link, useLoaderData, useSearchParams } from 'react-router-dom';
 import BlogFilter from './BlogFilter';
+import s from './ForStudyBlog.module.css';
 
 export type Post = {
   userId: number;
@@ -11,19 +10,13 @@ export type Post = {
 };
 
 const ForStudyBlog = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const posts = useLoaderData() as Post[];
   const [searchParams, setSearchParams] = useSearchParams();
 
   const postQuery = searchParams.get('post') || '';
   const latest = searchParams.has('latest');
 
-  const startsFrom = latest ? 80 : 1;
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(data => setPosts(data));
-  }, []);
+  const startsFrom = latest ? 80 : 0;
 
   return (
     <>
@@ -40,6 +33,12 @@ const ForStudyBlog = () => {
       </ol>
     </>
   );
+};
+
+export const postsLoader = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+  return res.json();
 };
 
 export default ForStudyBlog;
