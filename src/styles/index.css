@@ -1,16 +1,24 @@
 :root {
   --color-white: #fff;
-  --color-balck: #000;
+  --color-black: #000;
   --color-dark-gray: #10100e;
   --color-yellow: #ffff00;
+  --color-blue: #6a83fb;
 
   --spacing-medium: 20px;
+  --spacing-large: 30px;
 
+  --font-bold: 600;
+  --transition: 0.4s;
   --font-family-main: sans-serif;
 
   --font-size-header: 26px;
 
   --border-radius-small: 3px;
+
+  --text-shadow-yellow: 0 0 2px var(--color-white), 0 0 40px var(--color-blue);
+
+  --theme-default-header: #cccc46;
 }
 
 body {
@@ -19,4 +27,12 @@ body {
   background-color: var(--color-dark-gray);
   font-family: var(--font-family-main);
   color: var(--color-white);
+}
+
+.header__text {
+  line-height: 1.7;
+  font-size: var(--font-size-header);
+  text-shadow: 0 0 2px var(--color-black);
+  color: var(--theme-default-header);
+  transition: color var(--transition);
 }
