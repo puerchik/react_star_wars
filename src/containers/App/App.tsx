@@ -4,9 +4,9 @@ import { router } from '../../routes/routesConfig';
 
 const App = () => {
   return (
-    <>
+    <div className={s.wrapper}>
       <RouterProvider router={router} />
-    </>
+    </div>
   );
 };
 
