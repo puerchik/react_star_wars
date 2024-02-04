@@ -1,8 +1,13 @@
-import s from "./App.module.css";
-import PeoplePage from "../PeoplePage";
+import s from './App.module.css';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '../../routes/routesConfig';
 
 const App = () => {
-    return <PeoplePage />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;
