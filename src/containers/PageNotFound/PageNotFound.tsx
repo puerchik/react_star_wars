@@ -5,10 +5,10 @@ const PageNotFound = () => {
   let location = useLocation();
   return (
     <>
-      <div>
-        <h1>404</h1>
-        <p>Page not found</p>
-        <p>No match for {location.pathname}</p>
+      <div className={s.wrapper}>
+        <h1 className={s.title}>404</h1>
+        <p className={s.text}>Page not found</p>
+        <p className={s.text}>No match for {location.pathname}</p>
       </div>
     </>
   );
