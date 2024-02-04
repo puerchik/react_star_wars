@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../containers/HomePage';
 import PeoplePage from '../containers/PeoplePage';
 import Layout from './Layout';
-import PageNotFound from '../containers/PageNotFound';
+import NotFoundPage from '../containers/NotFoundPage';
 
 export const router = createBrowserRouter([
   {
@@ -18,8 +18,12 @@ export const router = createBrowserRouter([
         element: <PeoplePage />,
       },
       {
+        path: '/not-found',
+        element: <NotFoundPage />,
+      },
+      {
         path: '*',
-        element: <PageNotFound />,
+        element: <NotFoundPage />,
       },
     ],
   },

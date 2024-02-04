@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import s from './PageNotFound.module.css';
+import s from './NotFoundPage.module.css';
 
-const PageNotFound = () => {
+const NotFoundPage = () => {
   let location = useLocation();
   return (
     <>
@@ -14,4 +14,4 @@ const PageNotFound = () => {
   );
 };
 
-export default PageNotFound;
+export default NotFoundPage;
