@@ -3,6 +3,7 @@ import HomePage from '../containers/HomePage';
 import PeoplePage from '../containers/PeoplePage';
 import Layout from './Layout';
 import NotFoundPage from '../containers/NotFoundPage';
+import { getResourceLoader } from '../containers/PeoplePage/PeoplePage';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,12 @@ export const router = createBrowserRouter([
       {
         path: '/people',
         element: <PeoplePage />,
+        loader: getResourceLoader,
+      },
+      {
+        path: '/people/:page',
+        element: <PeoplePage />,
+        loader: getResourceLoader,
       },
       {
         path: '/not-found',

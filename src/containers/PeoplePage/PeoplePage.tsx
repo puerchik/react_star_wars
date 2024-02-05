@@ -1,13 +1,33 @@
 import PeopleList from '../../components/PeoplePage/PeopleList';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { ResultPeopleName, getApiResource } from '../../utils/network';
+import { Response, ResultPeopleName, getApiResource } from '../../utils/network';
 import { SWAPI_PEOPLE_QUERY } from '../../constatnts/api';
 import { WithErrorApi } from '../../hoc-helpers/WithErrorApi';
-import { useSearchParams } from 'react-router-dom';
+import { Params, useLoaderData, useParams, useSearchParams } from 'react-router-dom';
 import PeopleNavigation from '../../components/PeoplePage/PeopleNavigation';
+import { error } from 'console';
 
 export type PeoplePageProps = {
   setError: Dispatch<SetStateAction<boolean>>;
+};
+
+export const getResourceLoader = async ({ request }: { request: Request }) => {
+  const res = await getApiResource(SWAPI_PEOPLE_QUERY + request.url.slice(-1));
+  if (res) {
+    const peopleList = res.results.map(({ name, url }) => {
+      return {
+        name,
+        url,
+      };
+    });
+    return { res, peopleList };
+  } else {
+    return {
+      error: true,
+    };
+  }
+
+  return res;
 };
 
 const PeoplePage = ({ setError }: PeoplePageProps) => {
@@ -17,28 +37,23 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
   const [nextPage, setNextPage] = useState<string | null>(null);
   const page = searchParams.get('page');
 
-  const getResource = async (url: string) => {
-    const res = await getApiResource(url);
+  const res = useLoaderData() as { res: Response; peopleList: ResultPeopleName };
+  console.log(res);
 
-    if (res) {
-      const peopleList = res.results.map(({ name, url }) => {
-        return {
-          name,
-          url,
-        };
-      });
-      setPeople(peopleList);
-      setPrevPage(res.previous);
-      setNextPage(res.next);
-      setError(false);
-    } else {
-      setError(true);
-    }
-  };
-
-  useEffect(() => {
-    getResource(SWAPI_PEOPLE_QUERY + page);
-  }, [page]);
+  // if (res) {
+  //   const peopleList = res.results.map(({ name, url }) => {
+  //     return {
+  //       name,
+  //       url,
+  //     };
+  //   });
+  //   setPeople(peopleList);
+  //   setPrevPage(res.previous);
+  //   setNextPage(res.next);
+  //   setError(false);
+  // } else {
+  //   setError(true);
+  // }
 
   return (
     <>
