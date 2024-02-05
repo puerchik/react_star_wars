@@ -13,6 +13,8 @@ export type PeoplePageProps = {
 const PeoplePage = ({ setError }: PeoplePageProps) => {
   const [people, setPeople] = useState<null | ResultPeopleName[]>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [prevPage, setPrevPage] = useState<string | null>(null);
+  const [nextPage, setNextPage] = useState<string | null>(null);
   const page = searchParams.get('page');
   console.log(page);
 
@@ -27,6 +29,8 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
         };
       });
       setPeople(peopleList);
+      setPrevPage(res.previous);
+      setNextPage(res.next);
       setError(false);
     } else {
       setError(true);
@@ -39,7 +43,7 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
 
   return (
     <>
-      <PeopleNavigation page={Number(page)} />
+      <PeopleNavigation prevPage={prevPage} nextPage={nextPage} page={Number(page)} />
       {people && <PeopleList people={people} />}
     </>
   );
