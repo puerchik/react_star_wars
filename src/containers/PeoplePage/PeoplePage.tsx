@@ -3,9 +3,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Response, ResultPeopleName, getApiResource } from '../../utils/network';
 import { SWAPI_PEOPLE_QUERY } from '../../constatnts/api';
 import { WithErrorApi } from '../../hoc-helpers/WithErrorApi';
-import { Params, useLoaderData, useParams, useSearchParams } from 'react-router-dom';
+import { useLoaderData, useSearchParams } from 'react-router-dom';
 import PeopleNavigation from '../../components/PeoplePage/PeopleNavigation';
-import { error } from 'console';
 
 export type PeoplePageProps = {
   setError: Dispatch<SetStateAction<boolean>>;
@@ -26,39 +25,30 @@ export const getResourceLoader = async ({ request }: { request: Request }) => {
       error: true,
     };
   }
-
-  return res;
 };
 
 const PeoplePage = ({ setError }: PeoplePageProps) => {
-  const [people, setPeople] = useState<null | ResultPeopleName[]>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [nextPage, setNextPage] = useState<string | null>(null);
   const page = searchParams.get('page');
 
-  const res = useLoaderData() as { res: Response; peopleList: ResultPeopleName };
-  console.log(res);
+  const res = useLoaderData() as { res: Response; peopleList: ResultPeopleName[] };
 
-  // if (res) {
-  //   const peopleList = res.results.map(({ name, url }) => {
-  //     return {
-  //       name,
-  //       url,
-  //     };
-  //   });
-  //   setPeople(peopleList);
-  //   setPrevPage(res.previous);
-  //   setNextPage(res.next);
-  //   setError(false);
-  // } else {
-  //   setError(true);
-  // }
+  useEffect(() => {
+    if (res) {
+      setPrevPage(res.res.previous);
+      setNextPage(res.res.next);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }, [res]);
 
   return (
     <>
       <PeopleNavigation prevPage={prevPage} nextPage={nextPage} page={Number(page)} />
-      {people && <PeopleList people={people} />}
+      {res.peopleList && <PeopleList people={res.peopleList} />}
     </>
   );
 };
