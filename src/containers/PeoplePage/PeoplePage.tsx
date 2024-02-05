@@ -1,8 +1,9 @@
+import PeopleList from '../../components/PeoplePage/PeopleList';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ResultPeopleName, getApiResource } from '../../utils/network';
-import { SWAPI_PEOPLE } from '../../constatnts/api';
-import PeopleList from '../../components/PeoplePage/PeopleList';
+import { SWAPI_PEOPLE_QUERY } from '../../constatnts/api';
 import { WithErrorApi } from '../../hoc-helpers/WithErrorApi';
+import { useSearchParams } from 'react-router-dom';
 
 export type PeoplePageProps = {
   setError: Dispatch<SetStateAction<boolean>>;
@@ -10,6 +11,8 @@ export type PeoplePageProps = {
 
 const PeoplePage = ({ setError }: PeoplePageProps) => {
   const [people, setPeople] = useState<null | ResultPeopleName[]>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get('page');
 
   const getResource = async (url: string) => {
     const res = await getApiResource(url);
@@ -29,7 +32,7 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
   };
 
   useEffect(() => {
-    getResource(SWAPI_PEOPLE);
+    getResource(SWAPI_PEOPLE_QUERY + page);
   }, []);
 
   return <>{people && <PeopleList people={people} />}</>;
