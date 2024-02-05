@@ -16,7 +16,6 @@ const PeoplePage = ({ setError }: PeoplePageProps) => {
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [nextPage, setNextPage] = useState<string | null>(null);
   const page = searchParams.get('page');
-  console.log(page);
 
   const getResource = async (url: string) => {
     const res = await getApiResource(url);
