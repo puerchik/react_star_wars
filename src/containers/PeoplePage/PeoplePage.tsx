@@ -11,7 +11,9 @@ export type PeoplePageProps = {
 };
 
 export const getResourceLoader = async ({ request }: { request: Request }) => {
-  const res = await getApiResource(SWAPI_PEOPLE_QUERY + request.url.slice(-1));
+  const pageNumber = request.url.split('page=');
+
+  const res = await getApiResource(SWAPI_PEOPLE_QUERY + pageNumber[1]);
 
   if (res) {
     const peopleList = res.results.map(({ name, url }) => {
