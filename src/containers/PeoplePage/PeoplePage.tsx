@@ -12,6 +12,7 @@ export type PeoplePageProps = {
 
 export const getResourceLoader = async ({ request }: { request: Request }) => {
   const res = await getApiResource(SWAPI_PEOPLE_QUERY + request.url.slice(-1));
+
   if (res) {
     const peopleList = res.results.map(({ name, url }) => {
       return {
@@ -21,9 +22,7 @@ export const getResourceLoader = async ({ request }: { request: Request }) => {
     });
     return { res, peopleList };
   } else {
-    return {
-      error: true,
-    };
+    return false;
   }
 };
 

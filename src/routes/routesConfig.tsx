@@ -20,11 +20,6 @@ export const router = createBrowserRouter([
         loader: getResourceLoader,
       },
       {
-        path: '/people/:page',
-        element: <PeoplePage />,
-        loader: getResourceLoader,
-      },
-      {
         path: '/not-found',
         element: <NotFoundPage />,
       },

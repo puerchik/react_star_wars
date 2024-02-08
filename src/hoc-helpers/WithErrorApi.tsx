@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
-import s from './hoc.module.css';
 import ErrorMessage from '../components/ErrorMessage';
+import s from './hoc.module.css';
 
 type ViewProps = {
   setError: Dispatch<SetStateAction<boolean>>;
