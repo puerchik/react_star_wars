@@ -50,4 +50,9 @@ export type ResultPeople = {
   url: string;
 };
 
+export type ResultPerson = Omit<
+  ResultPeople,
+  'homeworld' | 'species' | 'vehicles' | 'starships' | 'created' | 'edited' | 'url'
+>;
+
 export type ResultPeopleName = Pick<ResultPeople, 'name' | 'url'>;
