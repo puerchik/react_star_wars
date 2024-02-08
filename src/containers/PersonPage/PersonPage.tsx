@@ -5,8 +5,9 @@ import { GUIDE_ROOT_IMG, SWAPI_PEOPLE, SWAPI_ROOT } from '../../constatnts/api';
 import WithErrorApi from '../../hoc-helpers/WithErrorApi';
 import { useEffect, useState } from 'react';
 import { WithErrorApiProps } from '../PeoplePage/PeoplePage';
+import PersonInfo from '../../components/PersonPage/PersonInfo';
 
-type PersonInfo = { title: string; data: string };
+export type PersonInfoType = { title: string; data: string };
 
 export const getPersonLoader = async ({ request }: { request: Request }) => {
   const movieHeroNumber = request.url.split('people/')[1];
@@ -22,7 +23,7 @@ export const getPersonLoader = async ({ request }: { request: Request }) => {
 const PersonPage = ({ setError }: WithErrorApiProps) => {
   const res = useLoaderData() as ResultPeople;
   const { id } = useParams();
-  const [personInfo, setPersonInfo] = useState<PersonInfo[] | null>(null);
+  const [personInfo, setPersonInfo] = useState<PersonInfoType[] | null>(null);
   const [personName, setPersonName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,20 +47,7 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
   return (
     <>
       <h1>{personName}</h1>
-      {personInfo && (
-        <ul>
-          {personInfo.map(
-            ({ title, data }) =>
-              data && (
-                <li key={title}>
-                  <span>
-                    {title}: {data}
-                  </span>
-                </li>
-              ),
-          )}
-        </ul>
-      )}
+      {personInfo && <PersonInfo personInfo={personInfo} />}
       <img src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
     </>
   );
