@@ -5,6 +5,7 @@ import Layout from './Layout';
 import NotFoundPage from '../containers/NotFoundPage';
 import { getResourceLoader } from '../containers/PeoplePage/PeoplePage';
 import PersonPage from '../containers/PersonPage';
+import { getPersonLoader } from '../containers/PersonPage/PersonPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       {
         path: '/people/:id',
         element: <PersonPage />,
+        loader: getPersonLoader,
       },
       {
         path: '/not-found',

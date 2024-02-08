@@ -31,7 +31,7 @@ export type Response = {
   results: ResultPeople[];
 };
 
-type ResultPeople = {
+export type ResultPeople = {
   name: string;
   height: string;
   mass: string;
