@@ -6,13 +6,12 @@ import { WithErrorApi } from '../../hoc-helpers/WithErrorApi';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import PeopleNavigation from '../../components/PeoplePage/PeopleNavigation';
 
-export type PeoplePageProps = {
+export type WithErrorApiProps = {
   setError: Dispatch<SetStateAction<boolean>>;
 };
 
 export const getResourceLoader = async ({ request }: { request: Request }) => {
   const pageNumber = request.url.split('page=')[1];
-
   const res = await getApiResource(SWAPI_PEOPLE_QUERY + pageNumber);
 
   if (res) {
@@ -28,7 +27,7 @@ export const getResourceLoader = async ({ request }: { request: Request }) => {
   }
 };
 
-const PeoplePage = ({ setError }: PeoplePageProps) => {
+const PeoplePage = ({ setError }: WithErrorApiProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [nextPage, setNextPage] = useState<string | null>(null);
