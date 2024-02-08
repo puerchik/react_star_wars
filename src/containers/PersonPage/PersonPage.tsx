@@ -29,13 +29,13 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
   useEffect(() => {
     if (res) {
       setPersonInfo([
-        { title: 'height', data: res.height },
-        { title: 'mass', data: res.mass },
-        { title: 'hair_color', data: res.hair_color },
-        { title: 'skin_color', data: res.skin_color },
-        { title: 'eye_color', data: res.eye_color },
-        { title: 'birth_year', data: res.birth_year },
-        { title: 'gender', data: res.gender },
+        { title: 'Height', data: res.height },
+        { title: 'Mass', data: res.mass },
+        { title: 'Hair color', data: res.hair_color },
+        { title: 'Skin color', data: res.skin_color },
+        { title: 'Eye color', data: res.eye_color },
+        { title: 'Birth year', data: res.birth_year },
+        { title: 'Gender', data: res.gender },
       ]);
       setPersonName(res.name);
       setError(false);
@@ -46,9 +46,13 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
 
   return (
     <>
-      <h1>{personName}</h1>
-      <PersonPhoto personName={personName} />
-      {personInfo && <PersonInfo personInfo={personInfo} />}
+      <div className={s.wrapper}>
+        <span className={s.person__name}>{personName}</span>
+        <div className={s.container}>
+          <PersonPhoto personName={personName} />
+          {personInfo && <PersonInfo personInfo={personInfo} />}
+        </div>
+      </div>
     </>
   );
 };

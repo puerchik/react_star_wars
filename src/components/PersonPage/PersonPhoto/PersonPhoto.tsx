@@ -5,8 +5,8 @@ import s from './PersonPhoto.module.css';
 const PersonPhoto = ({ personName }: { personName: string | null }) => {
   const { id } = useParams();
   return (
-    <div>
-      <img src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
+    <div className={s.container}>
+      <img className={s.photo} src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
     </div>
   );
 };

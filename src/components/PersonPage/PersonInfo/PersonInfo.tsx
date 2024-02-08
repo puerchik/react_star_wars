@@ -3,18 +3,20 @@ import { PersonInfoType } from '../../../containers/PersonPage/PersonPage';
 
 const PersonInfo = ({ personInfo }: { personInfo: PersonInfoType[] }) => {
   return (
-    <ul>
-      {personInfo.map(
-        ({ title, data }) =>
-          data && (
-            <li key={title}>
-              <span>
-                {title}: {data}
-              </span>
-            </li>
-          ),
-      )}
-    </ul>
+    <div className={s.wrapper}>
+      <ul className={s.list__container}>
+        {personInfo.map(
+          ({ title, data }) =>
+            data && (
+              <li className={s.list__item} key={title}>
+                <span className={s.item__title}>
+                  {title}: {data}
+                </span>
+              </li>
+            ),
+        )}
+      </ul>
+    </div>
   );
 };
 
