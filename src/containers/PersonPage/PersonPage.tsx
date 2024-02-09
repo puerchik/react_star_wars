@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { WithErrorApiProps } from '../PeoplePage/PeoplePage';
 import PersonInfo from '../../components/PersonPage/PersonInfo';
 import PersonPhoto from '../../components/PersonPage/PersonPhoto';
+import PersonLinkBack from '../../components/PersonPage/PersonLinkBack';
 
 export type PersonInfoType = { title: string; data: string };
 
@@ -46,6 +47,7 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
 
   return (
     <>
+      <PersonLinkBack />
       <div className={s.wrapper}>
         <span className={s.person__name}>{personName}</span>
         <div className={s.container}>
