@@ -8,6 +8,7 @@ import { WithErrorApiProps } from '../PeoplePage/PeoplePage';
 import PersonInfo from '../../components/PersonPage/PersonInfo';
 import PersonPhoto from '../../components/PersonPage/PersonPhoto';
 import PersonLinkBack from '../../components/PersonPage/PersonLinkBack';
+import PersonFilms from '../../components/PersonPage/PersonFilms';
 
 export type PersonInfoType = { title: string; data: string };
 export type ResponsePeopleFilms = { res: ResultPeople; films: FilmType[] };
@@ -28,7 +29,6 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
   const { res, films } = useLoaderData() as ResponsePeopleFilms;
   const [personInfo, setPersonInfo] = useState<PersonInfoType[] | null>(null);
   const [personName, setPersonName] = useState<string | null>(null);
-  console.log(films);
 
   useEffect(() => {
     if (res) {
@@ -56,17 +56,7 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
         <div className={s.container}>
           <PersonPhoto personName={personName} />
           {personInfo && <PersonInfo personInfo={personInfo} />}
-          <ul>
-            {films
-              .sort((a, b) => a.episode_id - b.episode_id)
-              .map(film => (
-                <li key={film.episode_id}>
-                  <span>Episode {film.episode_id}</span>
-                  <span>: </span>
-                  <span>{film.title}</span>
-                </li>
-              ))}
-          </ul>
+          <PersonFilms films={films} />
         </div>
       </div>
     </>
