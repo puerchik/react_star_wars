@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import s from './PersonPage.module.css';
-import { ResultPeople, getApiPeople } from '../../utils/network';
+import { FilmType, ResultPeople, getApiFilms, getApiPeople } from '../../utils/network';
 import { SWAPI_PEOPLE, SWAPI_ROOT } from '../../constatnts/api';
 import WithErrorApi from '../../hoc-helpers/WithErrorApi';
 import { useEffect, useState } from 'react';
@@ -10,27 +10,28 @@ import PersonPhoto from '../../components/PersonPage/PersonPhoto';
 import PersonLinkBack from '../../components/PersonPage/PersonLinkBack';
 
 export type PersonInfoType = { title: string; data: string };
+export type ResponsePeopleFilms = { res: ResultPeople; films: FilmType[] };
 
 export const getPersonLoader = async ({ request }: { request: Request }) => {
   const movieHeroNumber = request.url.split('people/')[1];
   const res: ResultPeople = await getApiPeople(SWAPI_ROOT + SWAPI_PEOPLE + `${movieHeroNumber}/`);
+  const films = await Promise.all(res.films.map(film => getApiFilms(film)));
 
   if (res) {
-    return res;
+    return { res, films };
   } else {
     return false;
   }
 };
 
 const PersonPage = ({ setError }: WithErrorApiProps) => {
-  const res = useLoaderData() as ResultPeople;
+  const { res, films } = useLoaderData() as ResponsePeopleFilms;
   const [personInfo, setPersonInfo] = useState<PersonInfoType[] | null>(null);
   const [personName, setPersonName] = useState<string | null>(null);
+  console.log(films);
 
   useEffect(() => {
     if (res) {
-      console.log(res);
-
       setPersonInfo([
         { title: 'Height', data: res.height },
         { title: 'Mass', data: res.mass },
@@ -55,6 +56,17 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
         <div className={s.container}>
           <PersonPhoto personName={personName} />
           {personInfo && <PersonInfo personInfo={personInfo} />}
+          <ul>
+            {films
+              .sort((a, b) => a.episode_id - b.episode_id)
+              .map(film => (
+                <li key={film.episode_id}>
+                  <span>Episode {film.episode_id}</span>
+                  <span>: </span>
+                  <span>{film.title}</span>
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
     </>

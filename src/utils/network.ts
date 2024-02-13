@@ -26,6 +26,16 @@ export const getApiPeople = async (endpoint: string) => {
   }
 };
 
+export const getApiFilms = async (endpoint: string) => {
+  try {
+    const res = await instance.get<FilmType[]>(endpoint);
+
+    return checkResultTry(res);
+  } catch (e: unknown) {
+    return checkResultCatch(e);
+  }
+};
+
 // types
 
 export type Response = {
@@ -49,6 +59,23 @@ export type ResultPeople = {
   species: string[];
   vehicles: string[];
   starships: string[];
+  created: string;
+  edited: string;
+  url: string;
+};
+
+export type FilmType = {
+  title: string;
+  episode_id: number;
+  opening_crawl: string;
+  director: string;
+  producer: string;
+  release_date: string;
+  characters: string[];
+  planets: string[];
+  starships: string[];
+  vehicles: string[];
+  species: string[];
   created: string;
   edited: string;
   url: string;
