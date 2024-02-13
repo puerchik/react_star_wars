@@ -1,7 +1,8 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { SWAPI_ROOT } from '../constatnts/api';
+import { checkResultCatch, checkResultTry } from './checkResult';
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: SWAPI_ROOT,
 });
 
@@ -9,16 +10,19 @@ export const getApiResource = async (endpoint: string) => {
   try {
     const res = await instance.get<Response>(endpoint);
 
-    if (res.status !== 200) {
-      console.log('Could not fetch. ', res.status);
-      return false;
-    }
-    return res.data;
+    return checkResultTry(res);
   } catch (e: unknown) {
-    if (e instanceof AxiosError) {
-      console.log('Could not fetch. ', e.response?.status);
-      return false;
-    }
+    return checkResultCatch(e);
+  }
+};
+
+export const getApiPeople = async (endpoint: string) => {
+  try {
+    const res = await instance.get<ResultPeople>(endpoint);
+
+    return checkResultTry(res);
+  } catch (e: unknown) {
+    return checkResultCatch(e);
   }
 };
 

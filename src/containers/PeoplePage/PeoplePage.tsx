@@ -12,7 +12,7 @@ export type WithErrorApiProps = {
 
 export const getResourceLoader = async ({ request }: { request: Request }) => {
   const pageNumber = request.url.split('page=')[1];
-  const res = await getApiResource(SWAPI_PEOPLE_QUERY + pageNumber);
+  const res: Response = await getApiResource(SWAPI_PEOPLE_QUERY + pageNumber);
 
   if (res) {
     const peopleList = res.results.map(({ name, url }) => {
