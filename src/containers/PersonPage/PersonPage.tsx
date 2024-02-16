@@ -9,6 +9,9 @@ import PersonInfo from '../../components/PersonPage/PersonInfo';
 import PersonPhoto from '../../components/PersonPage/PersonPhoto';
 import PersonLinkBack from '../../components/PersonPage/PersonLinkBack';
 import PersonFilms from '../../components/PersonPage/PersonFilms';
+import { useDispatch, useSelector } from 'react-redux';
+import { PersonStateType, setPersonInfoAC } from '../../store/reducers/personReducer';
+import { AppRootStateType } from '../../store/reducers';
 
 export type PersonInfoType = { title: string; data: string };
 export type ResponsePeopleFilms = { res: ResultPeople; films: FilmType[] };
@@ -29,9 +32,28 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
   const { res, films } = useLoaderData() as ResponsePeopleFilms;
   const [personInfo, setPersonInfo] = useState<PersonInfoType[] | null>(null);
   const [personName, setPersonName] = useState<string | null>(null);
+  const dispatch = useDispatch();
+  const person = useSelector<AppRootStateType, PersonStateType>(state => state.person);
+
+  console.log(person);
 
   useEffect(() => {
     if (res) {
+      dispatch(
+        setPersonInfoAC(
+          res.name,
+          [
+            { title: 'Height', data: res.height },
+            { title: 'Mass', data: res.mass },
+            { title: 'Hair color', data: res.hair_color },
+            { title: 'Skin color', data: res.skin_color },
+            { title: 'Eye color', data: res.eye_color },
+            { title: 'Birth year', data: res.birth_year },
+            { title: 'Gender', data: res.gender },
+          ],
+          films,
+        ),
+      );
       setPersonInfo([
         { title: 'Height', data: res.height },
         { title: 'Mass', data: res.mass },
