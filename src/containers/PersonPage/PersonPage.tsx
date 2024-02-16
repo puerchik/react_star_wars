@@ -30,8 +30,6 @@ export const getPersonLoader = async ({ request }: { request: Request }) => {
 
 const PersonPage = ({ setError }: WithErrorApiProps) => {
   const { res, films } = useLoaderData() as ResponsePeopleFilms;
-  const [personInfo, setPersonInfo] = useState<PersonInfoType[] | null>(null);
-  const [personName, setPersonName] = useState<string | null>(null);
   const dispatch = useDispatch();
   const person = useSelector<AppRootStateType, PersonStateType>(state => state.person);
 
@@ -54,31 +52,21 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
           films,
         ),
       );
-      setPersonInfo([
-        { title: 'Height', data: res.height },
-        { title: 'Mass', data: res.mass },
-        { title: 'Hair color', data: res.hair_color },
-        { title: 'Skin color', data: res.skin_color },
-        { title: 'Eye color', data: res.eye_color },
-        { title: 'Birth year', data: res.birth_year },
-        { title: 'Gender', data: res.gender },
-      ]);
-      setPersonName(res.name);
       setError(false);
     } else {
       setError(true);
     }
-  }, [res]);
+  }, []);
 
   return (
     <>
       <PersonLinkBack />
       <div className={s.wrapper}>
-        <span className={s.person__name}>{personName}</span>
+        <span className={s.person__name}>{person.personName}</span>
         <div className={s.container}>
-          <PersonPhoto personName={personName} />
-          {personInfo && <PersonInfo personInfo={personInfo} />}
-          <PersonFilms films={films} />
+          <PersonPhoto personName={person.personName} />
+          {person.personInfo && <PersonInfo personInfo={person.personInfo} />}
+          <PersonFilms films={person.films} />
         </div>
       </div>
     </>
