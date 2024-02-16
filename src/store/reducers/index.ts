@@ -6,3 +6,5 @@ export const rootReducer = combineReducers({
   people: peopleReducer,
   navigation: navigationReducer,
 });
+
+export type AppRootStateType = ReturnType<typeof rootReducer>;

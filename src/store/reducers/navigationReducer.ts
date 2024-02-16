@@ -27,6 +27,6 @@ export const setNavPageAC = (next: string | null, previous: string | null) => {
 };
 
 // types
-type SetNavPageType = ReturnType<typeof setNavPageAC>;
+export type SetNavPageType = ReturnType<typeof setNavPageAC>;
 
 type ActionsType = SetNavPageType;

@@ -1,11 +1,14 @@
 import PeopleList from '../../components/PeoplePage/PeopleList';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Response, ResultPeopleName, getApiResource } from '../../utils/network';
+import { NavPage, Response, ResultPeopleName, getApiResource } from '../../utils/network';
 import { SWAPI_PEOPLE_QUERY } from '../../constatnts/api';
 import { WithErrorApi } from '../../hoc-helpers/WithErrorApi';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import PeopleNavigation from '../../components/PeoplePage/PeopleNavigation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SetNavPageType, setNavPageAC } from '../../store/reducers/navigationReducer';
+import { AppRootStateType } from '../../store/reducers';
+import { setPeopleAC } from '../../store/reducers/peopleReducer';
 
 export type WithErrorApiProps = {
   setError: Dispatch<SetStateAction<boolean>>;
@@ -35,10 +38,13 @@ const PeoplePage = ({ setError }: WithErrorApiProps) => {
   const page = searchParams.get('page');
 
   const res = useLoaderData() as { res: Response; peopleList: ResultPeopleName[] };
+  const nav = useSelector<AppRootStateType, NavPage>(state => state.navigation);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (res) {
+      dispatch(setNavPageAC(res.res.next, ''));
+      dispatch(setPeopleAC(res.peopleList));
       setPrevPage(res.res.previous);
       setNextPage(res.res.next);
       setError(false);
