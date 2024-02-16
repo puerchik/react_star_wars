@@ -5,6 +5,7 @@ import { SWAPI_PEOPLE_QUERY } from '../../constatnts/api';
 import { WithErrorApi } from '../../hoc-helpers/WithErrorApi';
 import { useLoaderData, useSearchParams } from 'react-router-dom';
 import PeopleNavigation from '../../components/PeoplePage/PeopleNavigation';
+import { useDispatch } from 'react-redux';
 
 export type WithErrorApiProps = {
   setError: Dispatch<SetStateAction<boolean>>;
@@ -34,6 +35,7 @@ const PeoplePage = ({ setError }: WithErrorApiProps) => {
   const page = searchParams.get('page');
 
   const res = useLoaderData() as { res: Response; peopleList: ResultPeopleName[] };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (res) {

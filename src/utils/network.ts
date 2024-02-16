@@ -87,3 +87,5 @@ export type ResultPerson = Omit<
 >;
 
 export type ResultPeopleName = Pick<ResultPeople, 'name' | 'url'>;
+
+export type NavPage = Pick<Response, 'next' | 'previous'>;
