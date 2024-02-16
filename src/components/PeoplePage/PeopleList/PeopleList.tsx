@@ -16,7 +16,7 @@ const PeopleList = ({ people }: Props) => {
         const id = getUrlId(url, 'https://swapi.dev/api/people/');
 
         return (
-          <li className={s.list__item} key={id}>
+          <li className={s.list__item} key={name}>
             <Link to={`${id}`}>
               <img
                 className={s.person__photo}

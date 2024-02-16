@@ -33,20 +33,17 @@ export const getResourceLoader = async ({ request }: { request: Request }) => {
 
 const PeoplePage = ({ setError }: WithErrorApiProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [prevPage, setPrevPage] = useState<string | null>(null);
-  const [nextPage, setNextPage] = useState<string | null>(null);
   const page = searchParams.get('page');
 
   const res = useLoaderData() as { res: Response; peopleList: ResultPeopleName[] };
   const nav = useSelector<AppRootStateType, NavPage>(state => state.navigation);
+  const people = useSelector<AppRootStateType, ResultPeopleName[]>(state => state.people);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (res) {
-      dispatch(setNavPageAC(res.res.next, ''));
+      dispatch(setNavPageAC(res.res.next, res.res.previous));
       dispatch(setPeopleAC(res.peopleList));
-      setPrevPage(res.res.previous);
-      setNextPage(res.res.next);
       setError(false);
     } else {
       setError(true);
@@ -55,8 +52,8 @@ const PeoplePage = ({ setError }: WithErrorApiProps) => {
 
   return (
     <>
-      <PeopleNavigation prevPage={prevPage} nextPage={nextPage} page={Number(page)} />
-      {res.peopleList && <PeopleList people={res.peopleList} />}
+      <PeopleNavigation prevPage={nav.previous} nextPage={nav.next} page={Number(page)} />
+      {res.peopleList && <PeopleList people={people} />}
     </>
   );
 };
