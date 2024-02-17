@@ -36,7 +36,7 @@ export const removeFromFavoritesAC = (id: number) => {
 
 // types
 
-type FavoriteStateType = {
+export type FavoriteStateType = {
   [key: number]: string;
 };
 type AddToFavorites = ReturnType<typeof addToFavoritesAC>;

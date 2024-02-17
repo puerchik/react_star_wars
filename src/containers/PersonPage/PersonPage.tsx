@@ -12,7 +12,11 @@ import PersonFilms from '../../components/PersonPage/PersonFilms';
 import { useDispatch, useSelector } from 'react-redux';
 import { PersonStateType, setPersonInfoAC } from '../../store/reducers/personReducer';
 import { AppRootStateType } from '../../store/reducers';
-import { addToFavoritesAC, removeFromFavoritesAC } from '../../store/reducers/favoriteReducer';
+import {
+  FavoriteStateType,
+  addToFavoritesAC,
+  removeFromFavoritesAC,
+} from '../../store/reducers/favoriteReducer';
 
 export type PersonInfoType = { title: string; data: string };
 export type ResponsePeopleFilms = { res: ResultPeople; films: FilmType[] };
@@ -33,6 +37,7 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
   const { res, films } = useLoaderData() as ResponsePeopleFilms;
   const dispatch = useDispatch();
   const person = useSelector<AppRootStateType, PersonStateType>(state => state.person);
+  const favorite = useSelector<AppRootStateType, FavoriteStateType>(state => state.favorite);
   const { id } = useParams();
 
   useEffect(() => {
@@ -73,8 +78,11 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
         <span className={s.person__name}>{person.personName}</span>
         <div className={s.container}>
           <PersonPhoto personName={person.personName} />
-          <button onClick={addToFavorites}>Add to favorites</button>
-          <button onClick={removeFromFavorite}>Remove from favorites</button>
+          {favorite[Number(id)] ? (
+            <button onClick={removeFromFavorite}>Remove from favorites</button>
+          ) : (
+            <button onClick={addToFavorites}>Add to favorites</button>
+          )}
           {person.personInfo && <PersonInfo personInfo={person.personInfo} />}
           <PersonFilms films={person.films} />
         </div>
