@@ -6,6 +6,7 @@ import NotFoundPage from '../containers/NotFoundPage';
 import { getResourceLoader } from '../containers/PeoplePage/PeoplePage';
 import PersonPage from '../containers/PersonPage';
 import { getPersonLoader } from '../containers/PersonPage/PersonPage';
+import FavoritesPage from '../containers/FavoritesPage';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: '/not-found',
         element: <NotFoundPage />,
+      },
+      {
+        path: '/favorites',
+        element: <FavoritesPage />,
       },
       {
         path: '*',

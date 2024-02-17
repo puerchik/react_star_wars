@@ -12,10 +12,9 @@ import iconFavoriteFill from './img/favorite-fill.svg';
 import s from './PersonPhoto.module.css';
 
 const PersonPhoto = ({ personName }: { personName: string | null }) => {
-  const favorite = useSelector<AppRootStateType, FavoriteStateType>(state => state.favorite);
+  const favorite = useSelector<AppRootStateType, FavoriteStateType>(state => state.favorites);
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(favorite);
 
   const dispatchFavoritesPeople = () => {
     if (favorite[Number(id)]) {

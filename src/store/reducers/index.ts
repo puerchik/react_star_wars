@@ -8,7 +8,7 @@ export const rootReducer = combineReducers({
   people: peopleReducer,
   navigation: navigationReducer,
   person: personReducer,
-  favorite: favoriteReducer,
+  favorites: favoriteReducer,
 });
 
 export type AppRootStateType = ReturnType<typeof rootReducer>;
