@@ -26,25 +26,3 @@ const FavoritesPage = () => {
 };
 
 export default FavoritesPage;
-
-// <img className={s.photo} src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
-
-// return (
-//     <ul className={s.list__container}>
-//       {people.map(({ name, url }) => {
-//         const id = getUrlId(url, 'https://swapi.dev/api/people/');
-
-//         return (
-//           <li className={s.list__item} key={name}>
-//             <Link to={`${id}`}>
-//               <img
-//                 className={s.person__photo}
-//                 src={GUIDE_ROOT_IMG + getPeopleId(url) + '.jpg'}
-//                 alt={name}
-//               />
-//               <p>{name}</p>
-//             </Link>
-//           </li>
-//         );
-//       })}
-//     </ul>

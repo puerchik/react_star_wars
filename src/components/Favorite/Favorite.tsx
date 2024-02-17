@@ -7,12 +7,11 @@ import { FavoriteStateType } from '../../store/reducers/favoriteReducer';
 
 const Favorite = () => {
   const favorites = useSelector<AppRootStateType, FavoriteStateType>(state => state.favorites);
-  const counter = Object.keys(favorites).length;
 
   return (
     <div className={s.container}>
       <Link to={'/favorites'}>
-        <span className={s.counter}>{counter}</span>
+        <span className={s.counter}>{Object.keys(favorites).length}</span>
         <img className={s.icon} src={favoritesImg} alt="Favorites" />
       </Link>
     </div>
