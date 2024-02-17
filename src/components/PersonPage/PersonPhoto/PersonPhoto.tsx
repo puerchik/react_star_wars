@@ -15,23 +15,23 @@ const PersonPhoto = ({ personName }: { personName: string | null }) => {
   const { id } = useParams();
   console.log(favorite);
 
-  const addToFavorites = () => {
-    dispatch(addToFavoritesAC(Number(id), personName ? personName : 'personName'));
-  };
-
-  const removeFromFavorite = () => {
-    dispatch(removeFromFavoritesAC(Number(id)));
+  const dispatchFavoritesPeople = () => {
+    if (favorite[Number(id)]) {
+      dispatch(removeFromFavoritesAC(Number(id)));
+    } else {
+      dispatch(addToFavoritesAC(Number(id), personName ? personName : 'personName'));
+    }
   };
 
   return (
-    <div className={s.container}>
-      <img className={s.photo} src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
-      {favorite[Number(id)] ? (
-        <button onClick={removeFromFavorite}>Remove from favorites</button>
-      ) : (
-        <button onClick={addToFavorites}>Add to favorites</button>
-      )}
-    </div>
+    <>
+      <div className={s.container}>
+        <img className={s.photo} src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
+      </div>
+      <button onClick={dispatchFavoritesPeople}>
+        {favorite[Number(id)] ? 'Remove from favorites' : 'Add to favorites'}
+      </button>
+    </>
   );
 };
 
