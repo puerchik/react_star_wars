@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { GUIDE_ROOT_IMG } from '../../../constatnts/api';
-import s from './PersonPhoto.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from '../../../store/reducers';
 import {
@@ -8,6 +7,9 @@ import {
   addToFavoritesAC,
   removeFromFavoritesAC,
 } from '../../../store/reducers/favoriteReducer';
+import iconFavorite from './img/favorite.svg';
+import iconFavoriteFill from './img/favorite-fill.svg';
+import s from './PersonPhoto.module.css';
 
 const PersonPhoto = ({ personName }: { personName: string | null }) => {
   const favorite = useSelector<AppRootStateType, FavoriteStateType>(state => state.favorite);
@@ -27,10 +29,13 @@ const PersonPhoto = ({ personName }: { personName: string | null }) => {
     <>
       <div className={s.container}>
         <img className={s.photo} src={GUIDE_ROOT_IMG + id + '.jpg'} alt={personName || 'person'} />
+        <img
+          src={favorite[Number(id)] ? iconFavoriteFill : iconFavorite}
+          className={s.favorite}
+          onClick={dispatchFavoritesPeople}
+          alt="Add to favorites"
+        />
       </div>
-      <button onClick={dispatchFavoritesPeople}>
-        {favorite[Number(id)] ? 'Remove from favorites' : 'Add to favorites'}
-      </button>
     </>
   );
 };
