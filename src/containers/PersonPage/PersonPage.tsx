@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import s from './PersonPage.module.css';
 import { FilmType, ResultPeople, getApiFilms, getApiPeople } from '../../utils/network';
 import { SWAPI_PEOPLE, SWAPI_ROOT } from '../../constatnts/api';
@@ -12,6 +12,7 @@ import PersonFilms from '../../components/PersonPage/PersonFilms';
 import { useDispatch, useSelector } from 'react-redux';
 import { PersonStateType, setPersonInfoAC } from '../../store/reducers/personReducer';
 import { AppRootStateType } from '../../store/reducers';
+import { addToFavoritesAC, removeFromFavoritesAC } from '../../store/reducers/favoriteReducer';
 
 export type PersonInfoType = { title: string; data: string };
 export type ResponsePeopleFilms = { res: ResultPeople; films: FilmType[] };
@@ -32,8 +33,7 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
   const { res, films } = useLoaderData() as ResponsePeopleFilms;
   const dispatch = useDispatch();
   const person = useSelector<AppRootStateType, PersonStateType>(state => state.person);
-
-  console.log(person);
+  const { id } = useParams();
 
   useEffect(() => {
     if (res) {
@@ -58,6 +58,14 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
     }
   }, []);
 
+  const addToFavorites = () => {
+    dispatch(addToFavoritesAC(Number(id), res.name));
+  };
+
+  const removeFromFavorite = () => {
+    dispatch(removeFromFavoritesAC(Number(id)));
+  };
+
   return (
     <>
       <PersonLinkBack />
@@ -65,6 +73,8 @@ const PersonPage = ({ setError }: WithErrorApiProps) => {
         <span className={s.person__name}>{person.personName}</span>
         <div className={s.container}>
           <PersonPhoto personName={person.personName} />
+          <button onClick={addToFavorites}>Add to favorites</button>
+          <button onClick={removeFromFavorite}>Remove from favorites</button>
           {person.personInfo && <PersonInfo personInfo={person.personInfo} />}
           <PersonFilms films={person.films} />
         </div>
