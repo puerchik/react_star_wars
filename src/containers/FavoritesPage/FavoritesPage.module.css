@@ -27,3 +27,7 @@
   object-position: top center;
   border-radius: var(--border-radius-small) var(--border-radius-small) 0 0;
 }
+
+.comment {
+  color: var(--color-white);
+}

@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux';
-import s from './FavoritesPage.module.css';
 import { AppRootStateType } from '../../store/reducers';
 import { FavoriteStateType } from '../../store/reducers/favoriteReducer';
 import { toPairs } from 'lodash';
-import { Link } from 'react-router-dom';
-import { GUIDE_ROOT_IMG } from '../../constatnts/api';
 import PeopleList from '../../components/PeoplePage/PeopleList';
+import s from './FavoritesPage.module.css';
 
 const FavoritesPage = () => {
   const favorites = useSelector<AppRootStateType, FavoriteStateType>(state => state.favorites);
@@ -13,7 +11,12 @@ const FavoritesPage = () => {
 
   return (
     <>
-      <PeopleList people={favoritesPeople} />
+      <h1 className="header__text">Favorites</h1>
+      {favoritesPeople.length ? (
+        <PeopleList people={favoritesPeople} />
+      ) : (
+        <h2 className={s.comment}>No data.</h2>
+      )}
     </>
   );
 };
