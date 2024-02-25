@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setNavPageAC } from '../../store/reducers/navigationReducer';
 import { AppRootStateType } from '../../store/reducers';
 import { setPeopleAC } from '../../store/reducers/peopleReducer';
-import { getLoacalStorage, setLoacalStorage } from '../../utils/localStorage';
-import { setPageAC } from '../../store/reducers/localStorageReducer';
 
 export type WithErrorApiProps = {
   setError: Dispatch<SetStateAction<boolean>>;
@@ -47,7 +45,6 @@ const PeoplePage = ({ setError }: WithErrorApiProps) => {
     if (res) {
       dispatch(setNavPageAC(res.res.next, res.res.previous));
       dispatch(setPeopleAC(res.peopleList));
-      setLoacalStorage('navigation', JSON.stringify(res.res.next));
       setError(false);
     } else {
       setError(true);
