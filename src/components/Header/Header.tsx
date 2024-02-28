@@ -1,10 +1,15 @@
-import Favorite from '../Favorite';
 import { NavLink } from 'react-router-dom';
-import { SWAPI_PEOPLE_QUERY, SWAPI_ROOT } from '../../constatnts/api';
-import s from './Header.module.css';
 import { useSelector } from 'react-redux';
-import { AppRootStateType } from '../../store/reducers';
 import { NavPage } from '../../utils/network';
+import { AppRootStateType } from '../../store/reducers';
+import { SWAPI_PEOPLE_QUERY, SWAPI_ROOT } from '../../constatnts/api';
+import Favorite from '../Favorite';
+import { useContext, useEffect, useState } from 'react';
+import { ThemeContext, Themes } from '../../context/ThemeProvider';
+import droid from './img/droid.png';
+import lightsaber from './img/lightsaber.png';
+import spaceStation from './img/spaceStation.png';
+import s from './Header.module.css';
 
 const Header = () => {
   const navigation = useSelector<AppRootStateType, NavPage>(state => state.navigation);
@@ -13,8 +18,29 @@ const Header = () => {
       ? '9'
       : String(Number(navigation.next?.split(SWAPI_ROOT + SWAPI_PEOPLE_QUERY)[1]) - 1);
 
+  const theme = useContext(ThemeContext);
+  const [logo, setLogo] = useState(droid);
+
+  useEffect(() => {
+    switch (theme.theme) {
+      case 'neutral':
+        setLogo(droid);
+        break;
+      case 'light':
+        setLogo(lightsaber);
+        break;
+      case 'dark':
+        setLogo(spaceStation);
+        break;
+      default:
+        setLogo(droid);
+        break;
+    }
+  }, [theme]);
+
   return (
     <header className={s.container}>
+      <img className={s.logo} src={logo} alt="Star Wars" />
       <ul className={s.list__container}>
         <li>
           <NavLink to={'/'}>Home</NavLink>
