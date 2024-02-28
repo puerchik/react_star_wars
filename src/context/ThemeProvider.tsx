@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useState } from 'react';
+import { changeCssVariables } from '../services/changeCssVariables';
 
 export type Themes = 'neutral' | 'light' | 'dark';
 type ThemesContext = {
@@ -16,6 +17,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
 
   const change = (name: Themes) => {
     setTheme(name);
+    changeCssVariables(name);
   };
 
   const value = {

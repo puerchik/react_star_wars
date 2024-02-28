@@ -31,7 +31,13 @@
 
   --text-shadow-blue: 0 0 2px var(--color-white), 0 0 40px var(--color-blue);
 
-  --theme-default-header: #cccc46;
+  /* Themes */
+
+  --theme-light-header: #dfe2df;
+  --theme-dark-header: #ca6c6f;
+  --theme-neutral-header: #cccc46;
+  --theme-default-header: var(--theme-neutral-header);
+
   --theme-default-bgimage: url('../static/bg.jpg');
 }
 
