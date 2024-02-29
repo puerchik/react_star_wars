@@ -1,5 +1,8 @@
 export const changeCssVariables = (theme: string) => {
   const root = document.querySelector(':root') as HTMLElement;
+  const cssVariables = ['header', 'bgimage'];
 
-  root.style.setProperty('--theme-default-header', `var(--theme-${theme}-header)`);
+  cssVariables.forEach(el => {
+    root.style.setProperty(`--theme-default-${el}`, `var(--theme-${theme}-${el})`);
+  });
 };
