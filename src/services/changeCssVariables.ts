@@ -1,6 +1,5 @@
 export const changeCssVariables = (theme: string) => {
-  const root = document.querySelector(':root');
-  const _root = document.styleSheets;
+  const root = document.querySelector(':root') as HTMLElement;
 
-  console.log(_root, theme);
+  root.style.setProperty('--theme-default-header', `var(--theme-${theme}-header)`);
 };
