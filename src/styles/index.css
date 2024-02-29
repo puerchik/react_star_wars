@@ -31,6 +31,9 @@
 
   --text-shadow-blue: 0 0 2px var(--color-white), 0 0 40px var(--color-blue);
 
+  --box-shadow-black: 0 16px 24px 2px rgba(0, 0, 0, 0.5), 0 6px 30px 5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -5px rgba(0, 0, 0, 0.2);
+
   /* Themes */
 
   --theme-light-header: #dfe2df;
