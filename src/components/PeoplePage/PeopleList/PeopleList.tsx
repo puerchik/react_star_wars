@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { GUIDE_ROOT_IMG } from '../../../constatnts/api';
 import { getPeopleId } from '../../../services/getPeopleData';
 import { getUrlId } from '../../../utils/getId';
@@ -13,6 +13,8 @@ type Props = {
 };
 
 const PeopleList = ({ people }: Props) => {
+  const location = useLocation();
+
   return (
     <ul className={s.list__container}>
       {people.map(({ name, url, id }) => {
@@ -20,9 +22,18 @@ const PeopleList = ({ people }: Props) => {
         if (url) {
           urlId = getUrlId(url, 'https://swapi.dev/api/people/');
         }
+
         return (
           <li className={s.list__item} key={name}>
-            <Link to={url ? `${urlId}` : `${`../people/${id}`}`}>
+            <Link
+              to={
+                url && location.pathname !== '/search'
+                  ? `${urlId}`
+                  : location.pathname === '/search'
+                  ? `${`../people/${urlId}`}`
+                  : `${`../people/${id}`}`
+              }
+            >
               <img
                 className={s.person__photo}
                 src={GUIDE_ROOT_IMG + (url ? getPeopleId(url) : id) + '.jpg'}
