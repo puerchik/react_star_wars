@@ -11,8 +11,6 @@ const SearchPage = ({ setError }: WithErrorApiProps) => {
   const [peopleList, setPeopleList] = useState<ResultPeopleName[]>([]);
 
   const getResponse = async (param: string) => {
-    console.log(param);
-
     const res: Response = await getApiResource(SWAPI_PEOPLE_SEARCH + param);
     if (res) {
       const people = res.results.map(el => {
