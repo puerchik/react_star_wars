@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios from 'axios';
 import { SWAPI_ROOT } from '../constatnts/api';
 import { checkResultCatch, checkResultTry } from './checkResult';
 
