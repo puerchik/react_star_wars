@@ -1,7 +1,7 @@
 import { NavPage } from '../../utils/network';
 
 const initialState: NavPage = {
-  next: null,
+  next: '2',
   previous: null,
 };
 
