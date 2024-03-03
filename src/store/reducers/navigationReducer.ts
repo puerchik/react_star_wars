@@ -1,7 +1,8 @@
+import { SWAPI_PEOPLE_QUERY, SWAPI_ROOT } from '../../constatnts/api';
 import { NavPage } from '../../utils/network';
 
 const initialState: NavPage = {
-  next: '2',
+  next: SWAPI_ROOT + SWAPI_PEOPLE_QUERY + '2',
   previous: null,
 };
 
