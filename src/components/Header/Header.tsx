@@ -5,7 +5,7 @@ import { AppRootStateType } from '../../store/reducers';
 import { SWAPI_PEOPLE_QUERY, SWAPI_ROOT } from '../../constatnts/api';
 import Favorite from '../Favorite';
 import { useContext, useEffect, useState } from 'react';
-import { ThemeContext, Themes } from '../../context/ThemeProvider';
+import { ThemeContext } from '../../context/ThemeProvider';
 import droid from './img/droid.png';
 import lightsaber from './img/lightsaber.png';
 import spaceStation from './img/spaceStation.png';
@@ -15,7 +15,7 @@ const Header = () => {
   const navigation = useSelector<AppRootStateType, NavPage>(state => state.navigation);
   const pageNumber =
     navigation.next === null
-      ? '8'
+      ? '9'
       : String(Number(navigation.next?.split(SWAPI_ROOT + SWAPI_PEOPLE_QUERY)[1]) - 1);
 
   const theme = useContext(ThemeContext);
