@@ -20,6 +20,10 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: '/react_star_wars',
+        element: <Navigate to={'/'} />,
+      },
+      {
         path: '/people',
         element: <PeoplePage />,
         loader: getResourceLoader,
