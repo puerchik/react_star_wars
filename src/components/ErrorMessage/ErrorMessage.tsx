@@ -1,3 +1,5 @@
+import UIVideo from '../UIVideo';
+import video from './../UIVideo/video/video.mp4';
 import s from './ErrorMessage.module.css';
 
 const ErrorMessage = () => {
@@ -10,6 +12,7 @@ const ErrorMessage = () => {
         <br />
         Come back when we fix everything
       </p>
+      <UIVideo src={video} classes={s.video} />
     </>
   );
 };

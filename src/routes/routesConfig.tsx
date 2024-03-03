@@ -8,6 +8,7 @@ import PersonPage from '../containers/PersonPage';
 import { getPersonLoader } from '../containers/PersonPage/PersonPage';
 import FavoritesPage from '../containers/FavoritesPage';
 import SearchPage from '../containers/SearchPage';
+import ErrorMessage from '../components/ErrorMessage';
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: '/search',
         element: <SearchPage />,
+      },
+      {
+        path: '/fail',
+        element: <ErrorMessage />,
       },
       {
         path: '/favorites',
