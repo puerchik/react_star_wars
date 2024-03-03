@@ -12,10 +12,14 @@ const PeopleNavigation = ({ prevPage, nextPage, page }: Props) => {
   return (
     <div className={s.wrapper}>
       <Link to={SWAPI_QUERY + (page - 1).toString()}>
-        <button disabled={!prevPage}>Prev</button>
+        <button className={s.button} disabled={!prevPage}>
+          Previous
+        </button>
       </Link>
       <Link to={SWAPI_QUERY + (page + 1).toString()}>
-        <button disabled={!nextPage}>Next</button>
+        <button className={s.button} disabled={!nextPage}>
+          Next
+        </button>
       </Link>
     </div>
   );

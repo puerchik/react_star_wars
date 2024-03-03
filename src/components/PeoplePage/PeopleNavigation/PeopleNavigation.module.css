@@ -1,4 +1,40 @@
+:root {
+  --font-size-small: 14px;
+  --font-family-main: sans-serif;
+  --font-bold: 600;
+  --transition: 0.4s;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-gray: #9c9c9c;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
+  gap: var(--spacing-small);
+}
+
+.button {
+  min-width: 100px;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: var(--font-size-small);
+  font-family: var(--font-family-main);
+  font-weight: var(--font-bold);
+  background: none;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+}
+.button:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+.button:disabled,
+.button:disabled:hover {
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray);
+  background-color: transparent;
+  cursor: auto;
 }
