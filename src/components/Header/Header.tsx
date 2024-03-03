@@ -15,7 +15,7 @@ const Header = () => {
   const navigation = useSelector<AppRootStateType, NavPage>(state => state.navigation);
   const pageNumber =
     navigation.next === null
-      ? '9'
+      ? '8'
       : String(Number(navigation.next?.split(SWAPI_ROOT + SWAPI_PEOPLE_QUERY)[1]) - 1);
 
   const theme = useContext(ThemeContext);
