@@ -21,9 +21,13 @@ React Star Wars is an interactive website that allows users to choose a theme fo
 
 To work with the project, you need to have Node.js and npm installed. After cloning the repository, run the following commands:
 
-`npm install`
+```bash
+npm install
+```
 
-`npm start`
+```bash
+npm start
+```
 
 These commands will install all necessary dependencies and start the development server.
 
