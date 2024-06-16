@@ -13,6 +13,12 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 40px;
+
+  @media (max-width: 880px) {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+  }
 }
 .item {
   position: relative;
@@ -25,6 +31,7 @@
   box-shadow: var(--box-shadow-black);
   transition: --transition;
   cursor: pointer;
+  transition: 0.2s;
 }
 .item_header {
   position: absolute;
@@ -55,12 +62,26 @@
   color: var(--color-neutral);
 }
 
-.item__light:hover {
-  box-shadow: 0 0 7px 2px var(--color-shadow-light);
+@media (hover: hover) {
+  .item__light:hover {
+    box-shadow: 0 0 7px 2px var(--color-shadow-light);
+  }
+  .item__dark:hover {
+    box-shadow: 0 0 7px 2px var(--color-shadow-dark);
+  }
+  .item__neutral:hover {
+    box-shadow: 0 0 7px 2px var(--color-shadow-neutral);
+  }
 }
-.item__dark:hover {
-  box-shadow: 0 0 7px 2px var(--color-shadow-dark);
-}
-.item__neutral:hover {
-  box-shadow: 0 0 7px 2px var(--color-shadow-neutral);
+
+@media (hover: none) {
+  .item__light:active {
+    box-shadow: 0 0 7px 2px var(--color-shadow-light);
+  }
+  .item__dark:active {
+    box-shadow: 0 0 7px 2px var(--color-shadow-dark);
+  }
+  .item__neutral:active {
+    box-shadow: 0 0 7px 2px var(--color-shadow-neutral);
+  }
 }
